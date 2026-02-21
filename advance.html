@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced A-Frame 360 Viewer</title>
+
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+<style>
+body { margin:0; }
+
+#ui {
+  position:absolute;
+  border:none;
+  border-radius: 5px;
+  top:10px;
+  left:10px;
+  z-index:999;
+  background:rgba(0,0,0,0.5);
+  color:white;
+  padding:10px;
+  cursor: pointer;
+}
+#ui_1 {
+  position:absolute;
+  border:none;
+  border-radius: 5px;
+  top:10px;
+  left:160px;
+  z-index:999;
+  background:rgba(0,0,0,0.5);
+  color:white;
+  padding:10px;
+  cursor: pointer;
+}
+#ui_2{
+  position:absolute;
+  border:none;
+  border-radius: 5px;
+  top:10px;
+  left:310px;
+  z-index:999;
+  background:rgba(0,0,0,0.5);
+  color:white;
+  padding:10px;
+  cursor: pointer;
+}
+/* 簡單提示 */
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: rgba(250, 246, 8, 0.88);
+            background: rgba(0,0,0,0.4);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 100;
+            pointer-events: none;
+        }
+</style>
+
+</head>
+
+<body>
+
+<!--<div id="ui" style="color:yellow;">
+  360 Viewer 1
+</div>
+<div id="ui_1">
+  360 Viewer 2
+</div>
+<div id="ui_2">
+  360 Viewer 3
+</div>-->
+<button type="button" id="ui" style="color:yellow;">360 Image 1</button>
+<button type="button" id="ui_1">360 Image 2</button>
+<button type="button" id="ui_2">360 Image 3</button>
+
+<div class="info">👆| 支援VR模式 (可用手指或滑鼠拖曳觀看)</div>
+
+<a-scene>
+
+<a-assets>
+  <img id="scene1" src="R0010489.JPG">
+  <img id="scene2" src="R0010490.JPG">
+  <img id="scene3" src="R0010495.JPG">
+</a-assets>
+
+<!-- SKY -->
+<a-sky id="sky" src="#scene1"></a-sky>
+
+<!-- CAMERA -->
+<a-entity id="rig">
+  <a-camera
+    id="cam"
+    look-controls="magicWindowTrackingEnabled:false"
+    wasd-controls="enabled:false">
+  </a-camera>
+</a-entity>
+
+<!-- HOTSPOT -->
+<!--<a-entity
+  geometry="primitive: sphere; radius: 0.3"
+  material="color: red"
+  position="3 1 -3"
+  class="hotspot">
+</a-entity>-->
+
+</a-scene>
+
+<script>
+
+const sky = document.querySelector("#sky");
+const color = document.getElementById("ui");
+const color1 = document.getElementById("ui_1");
+const color2 = document.getElementById("ui_2");
+
+//document.querySelector(".hotspot")
+document.querySelector("#ui")
+.addEventListener("click", ()=>{
+color.style.color = "yellow";
+color1.style.color = "white";
+color2.style.color = "white";
+
+  // fade effect
+  sky.setAttribute("animation",
+    "property: material.opacity; to:0; dur:400");
+    
+ setTimeout(()=>{
+
+    sky.setAttribute("src","#scene1");
+
+    sky.setAttribute("animation",
+    "property: material.opacity; to:1; dur:400");
+
+ },400);
+
+});
+
+document.querySelector("#ui_1")
+.addEventListener("click", ()=>{
+  color.style.color = "white";
+  color1.style.color = "yellow";
+   color2.style.color = "white";
+
+  // fade effect
+  sky.setAttribute("animation",
+    "property: material.opacity; to:0; dur:400");
+    
+ setTimeout(()=>{
+
+    sky.setAttribute("src","#scene2");
+
+    sky.setAttribute("animation",
+    "property: material.opacity; to:1; dur:400");
+
+ },400);
+
+});
+document.querySelector("#ui_2")
+.addEventListener("click", ()=>{
+  color.style.color = "white";
+  color1.style.color = "white";
+   color2.style.color = "yellow";
+
+  // fade effect
+  sky.setAttribute("animation",
+    "property: material.opacity; to:0; dur:400");
+    
+ setTimeout(()=>{
+
+    sky.setAttribute("src","#scene3");
+
+    sky.setAttribute("animation",
+    "property: material.opacity; to:1; dur:400");
+
+ },400);
+
+});
+
+</script>
+
+</body>
+</html>
