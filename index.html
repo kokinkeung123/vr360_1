@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-Frame 360 Example</title>
+
+  <!-- A-frame CDN -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+
+<body>
+
+<a-scene>
+
+  <!-- preload asset -->
+  <a-assets>
+    <img id="sky360" src="R0010490.JPG">
+  </a-assets>
+
+  <!-- 360 panorama -->
+  <a-sky src="#sky360"></a-sky>
+
+</a-scene>
+
+</body>
+</html>
